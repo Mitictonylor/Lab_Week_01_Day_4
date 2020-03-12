@@ -123,8 +123,11 @@ class TestFriends < MiniTest::Test
 
   def test_monies_loan
     result = monies_loan(@person5, @person1, 90)
-    assert_equal("Shaggy now has 91 monies. Daphne has 10", result)
+    # Original test: assert_equal("Shaggy now has 91 monies. Daphne has 10", result)
+    assert_equal("Successful transaction of 90", result)
   end
+
+
 
   # 8. Find the set of everyone's favourite food joined together
   # (hint: concatenate the favourites/snack arrays together)

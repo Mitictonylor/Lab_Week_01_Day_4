@@ -40,9 +40,19 @@ end
 
 
 def monies_loan(loaner, loanee, money_lend)
+  loaner_money_start = loaner[:monies]
+  loanee_money_start = loanee[:monies]
+
   loaner[:monies] -= money_lend
   loanee[:monies] += money_lend
-  return "#{loanee[:name]} now has #{loanee[:monies]} monies. #{loaner[:name]} has #{loaner[:monies]}"
+
+  if loanee_money_start != loanee[:monies] && loaner_money_start != loaner[:monies]
+    return "Successful transaction of #{money_lend}"
+  else
+    return "unsuccessful"
+  end
+
+  #original return. return "#{loanee[:name]} now has #{loanee[:monies]} monies. #{loaner[:name]} has #{loaner[:monies]}"
 end
 
 def food_all(people)
