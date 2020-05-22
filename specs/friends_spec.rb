@@ -82,31 +82,48 @@ class TestFriends < MiniTest::Test
 
   # 3. For a given person, check if they like a particular food
   # (e.g. the function likes_to_eat(@person2, "bread") should return true, likes_to_eat(@person3, "spinach") should return false)
+
   def test_check_food_like
     result = check_food_like(@person4, "spaghetti")
-    assert_equal("Yum", result)
+    assert_equal(true, result)
+  end
+
+
+  def test_check_food_like
+    res = check_food_like(@person4, "Scooby snacks")
+    result = check_food_like(@person4, "spaghetti")
+    assert_equal(true, result)
+    assert_equal(false, res)
   end
 
   def test_check_food_not_like
     result = check_food_like(@person4, "Scooby snacks")
-    assert_equal("bleaugh", result)
+    assert_equal(false, result)
   end
 
   # 4. For a given person, add a new name to their list of friends
   # (e.g. the function add_friend(@person2, "Scrappy-Doo") should add Scrappy-Doo to the friends.)
   # (hint: This function should not return anything. After the function call, check for the length of the friends array to test it!)
-
   def test_check_friend_add
     result = friend_add(@person2, "John")
     assert_equal(2, result)
+end
+
+  def test_check_friend_add_2
+    friend_add_2(@person2, "John")
+    assert_equal(2,(@person2[:friends].length))
   end
 
   # 5. For a given person, remove a specific name from their list of friends
   # (hint: Same as above, testing for the length of the array should be sufficient)
-
   def test_check_friend_remove
     result = friend_remove(@person1, "Velma")
     assert_equal(3, result)
+  end
+
+  def test_check_friend_remove_2
+    friend_remove_2(@person1, "Velma")
+    assert_equal(3,(@person1[:friends].length))
   end
 
 
@@ -120,6 +137,10 @@ class TestFriends < MiniTest::Test
   # 7. For two given people, allow the first person to loan a given value of money to the other
   # (hint: our function will probably need 3 arguments passed to it... the lender, the lendee, and the amount for this function)
   # (hint2: You should test if both the lender's and the lendee's money have changed, maybe two assertions?)
+def lend_money(lender, borrower, amount)
+  lender[:monies] -= amount
+  borrower[:monies] += amount
+end
 
   def test_monies_loan
     result = monies_loan(@person5, @person1, 90)
@@ -141,6 +162,15 @@ class TestFriends < MiniTest::Test
   def test_friends_none
     result = friends_none(@people)
     assert_equal(["Daphne"], result)
+  end
+
+def test_can_find_no_friends
+  result = find_no_friends(@people)
+  assert_equal(1, result.length)
+end
+
+  def test_find_no_friends
+    assert_equal([@person5], find_no_friends(@people))
   end
 
 end
